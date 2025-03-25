@@ -1,10 +1,13 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import { db } from "../db/db";
+import { store } from "../store/store";
 
 const universes = ref<string[]>([]);
 
-onMounted(() => {});
+onMounted(async () => {
+  universes.value = await store.getAllUniverses();
+});
 
 const newUniverse = ref("");
 function addUniverse() {

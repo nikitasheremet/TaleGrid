@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import { db } from "../db/db";
+import type { Table } from "../types/table";
 
-const tables = ref<string[]>([]);
+const tables = ref<Table[]>([]);
 onMounted(() => {
-  console.log(db);
   const transaction = db.transaction("tables", "readonly");
   const objectStore = transaction.objectStore("tables");
   const request = objectStore.getAll();
@@ -19,7 +19,7 @@ function addTable() {
     try {
       const transaction = db.transaction("tables", "readwrite");
       const objectStore = transaction.objectStore("tables");
-      objectStore.add({ name: newTable.value });
+      objectStore.add({ name: newTable.value, id: crypto.randomUUID() });
     } catch (error) {
       console.error(error);
     }

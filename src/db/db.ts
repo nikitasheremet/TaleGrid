@@ -13,7 +13,12 @@ export async function openDB() {
 
       try {
         db.createObjectStore("universes", { keyPath: "name" });
-        db.createObjectStore("tables", { keyPath: "name" });
+        db.createObjectStore("tables", { keyPath: "id" });
+
+        const columnObjectStore = db.createObjectStore("columns", {
+          keyPath: "id",
+        });
+        columnObjectStore.createIndex("tableId", "tableId", { unique: false });
       } catch (e) {
         console.error(e);
       }

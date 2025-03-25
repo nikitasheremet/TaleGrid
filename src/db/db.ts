@@ -12,7 +12,7 @@ export async function openDB() {
       db = request.result;
 
       try {
-        db.createObjectStore("universes", { keyPath: "name" });
+        db.createObjectStore("universes", { keyPath: "id" });
         db.createObjectStore("tables", { keyPath: "id" });
 
         const columnObjectStore = db.createObjectStore("columns", {

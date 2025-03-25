@@ -1,40 +1,9 @@
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
-import { db } from "../db/db";
-import { store } from "../store/store";
-
-const universes = ref<string[]>([]);
-
-onMounted(async () => {
-  universes.value = await store.getAllUniverses();
-});
-
-const newUniverse = ref("");
-function addUniverse() {
-  if (newUniverse.value) {
-    try {
-      universes.value.push(newUniverse.value);
-      const transaction = db.transaction("universes", "readwrite");
-      const objectStore = transaction.objectStore("universes");
-      objectStore.add({ name: newUniverse.value });
-    } catch (error) {
-      console.error(error);
-    }
-
-    newUniverse.value = "";
-  }
-}
+import Universes from "../components/universes/Universes.vue";
 </script>
 
 <template>
-  <p>List of universes</p>
-  <div>
-    <RouterLink :to="`/universe/${universe}`" v-for="universe in universes">
-      {{ universe }}
-    </RouterLink>
-  </div>
-  <input type="text" v-model="newUniverse" />
-  <button @click="addUniverse">Add universe</button>
+  <Universes />
 </template>
 
 <style scoped></style>

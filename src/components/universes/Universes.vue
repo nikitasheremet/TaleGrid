@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import Error from "../error/Error.vue";
+import AddUniverse from "./AddUniverse.vue";
 import ExistingUniverses from "./ExistingUniverses.vue";
 import { useGetUniverses } from "./hooks/useGetUniverses";
 
@@ -8,6 +9,7 @@ const { existingUniverses, error } = useGetUniverses();
 
 <template>
   <ExistingUniverses :universes="existingUniverses" />
+  <AddUniverse />
   <Error v-if="error" :error="error" />
 </template>
 

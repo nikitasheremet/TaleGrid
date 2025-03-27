@@ -13,7 +13,13 @@ export async function openDB() {
 
       try {
         db.createObjectStore("universes", { keyPath: "id" });
-        db.createObjectStore("tables", { keyPath: "id" });
+
+        const tableObjectStore = db.createObjectStore("tables", {
+          keyPath: "id",
+        });
+        tableObjectStore.createIndex("universeId", "universeId", {
+          unique: false,
+        });
 
         const columnObjectStore = db.createObjectStore("columns", {
           keyPath: "id",

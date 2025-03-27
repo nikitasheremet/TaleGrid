@@ -2,10 +2,13 @@ import { ref } from "vue";
 import type { Universe } from "../../../types/universe";
 import { addNewUniverse } from "../../../service/universe/addNewUniverse";
 
-export function useAddUniverse() {
+export function useAddUniverse(
+  addUniverseCallback: (newUniverse: Universe) => void
+) {
   const newUniverseName = ref("");
-  async function addUniverse(): Promise<Universe> {
-    return await addNewUniverse(newUniverseName.value);
+  async function addUniverse(): Promise<void> {
+    const addedUniverse = await addNewUniverse(newUniverseName.value);
+    addUniverseCallback(addedUniverse);
   }
   return {
     newUniverseName,

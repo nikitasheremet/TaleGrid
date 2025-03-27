@@ -1,7 +1,15 @@
 <script lang="ts" setup>
+import type { Universe } from "../../types/universe";
 import { useAddUniverse } from "./hooks/useAddUniverse";
 
-const { newUniverseName, addUniverse } = useAddUniverse();
+const emits = defineEmits<{
+  addedUniverse: [Universe];
+}>();
+function emitAddedUniverse(universe: Universe) {
+  emits("addedUniverse", universe);
+}
+
+const { newUniverseName, addUniverse } = useAddUniverse(emitAddedUniverse);
 </script>
 
 <template>

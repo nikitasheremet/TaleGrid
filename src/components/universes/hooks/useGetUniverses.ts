@@ -3,6 +3,7 @@ import type { Universe } from "../../../types/universe";
 import { getAllUniverses } from "../../../service/universe/getAllUniverses";
 
 export function useGetUniverses() {
+  console.log("in useGetUniverses");
   const existingUniverses = ref<Universe[]>([]);
   const error = ref<Error | undefined>(undefined);
 

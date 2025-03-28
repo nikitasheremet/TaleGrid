@@ -1,48 +1,15 @@
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
-import { db } from "../db/db";
-import type { Table } from "../types/table";
+import UniverseDetails from "../components/universeDetails/UniverseDetails.vue";
+import { useRoute } from "vue-router";
 
-const tables = ref<Table[]>([]);
-onMounted(() => {
-  const transaction = db.transaction("tables", "readonly");
-  const objectStore = transaction.objectStore("tables");
-  const request = objectStore.getAll();
-  request.onsuccess = () => {
-    tables.value = request.result.map((table: any) => table.name);
-  };
-});
+const route = useRoute();
 
-const newTable = ref("");
-function addTable() {
-  if (newTable.value) {
-    try {
-      const transaction = db.transaction("tables", "readwrite");
-      const objectStore = transaction.objectStore("tables");
-      objectStore.add({ name: newTable.value, id: crypto.randomUUID() });
-    } catch (error) {
-      console.error(error);
-    }
-
-    tables.value.push(newTable.value);
-    newTable.value = "";
-  }
-}
+const universeId = route.params.universeId as string;
+const universeName = route.params.universeName as string;
 </script>
 
 <template>
-  <p>Selected Universe {{ $route.params.universe }}</p>
-  <p>Tables</p>
-  <div>
-    <RouterLink
-      :to="`/universe/${$route.params.universe}/table/${table}`"
-      v-for="table in tables"
-    >
-      {{ table }}
-    </RouterLink>
-  </div>
-  <input type="text" v-model="newTable" />
-  <button @click="addTable">Add table</button>
+  <UniverseDetails :universe-id="universeId" :universe-name="universeName" />
 </template>
 
 <style scoped></style>

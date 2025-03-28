@@ -2,6 +2,7 @@
 import type { Universe } from "../../types/universe";
 import { useAddUniverse } from "./hooks/useAddUniverse";
 
+console.log("In AddUniverse.vue");
 const emits = defineEmits<{
   addedUniverse: [Universe];
 }>();
@@ -14,11 +15,9 @@ const { newUniverseName, addUniverse } = useAddUniverse(emitAddedUniverse);
 
 <template>
   <h2>Add New Universe</h2>
-  <form>
-    <label for="universe-name">Universe Name</label>
-    <input type="text" id="universe-name" v-model="newUniverseName" />
-    <button type="submit" @click="addUniverse">Add Universe</button>
-  </form>
+  <label for="universe-name">Universe Name</label>
+  <input type="text" id="universe-name" v-model="newUniverseName" />
+  <button type="submit" @click="addUniverse">Add Universe</button>
 </template>
 
 <style scoped></style>

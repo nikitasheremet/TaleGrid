@@ -9,7 +9,7 @@ const routes = [
     component: SelectedUniverseView,
   },
   {
-    path: "/universe/:universe/table/:tableName/:tableId",
+    path: "/universe/:universeName/:universeId/table/:tableName/:tableId",
     component: SelectedTableView,
   },
 ];

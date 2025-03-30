@@ -25,6 +25,11 @@ export async function openDB() {
           keyPath: "id",
         });
         columnObjectStore.createIndex("tableId", "tableId", { unique: false });
+
+        const rowObjectStore = db.createObjectStore("rows", {
+          keyPath: "id",
+        });
+        rowObjectStore.createIndex("tableId", "tableId", { unique: false });
       } catch (e) {
         console.error(e);
       }

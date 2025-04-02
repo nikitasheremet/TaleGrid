@@ -4,6 +4,10 @@ import AddNewColumn from "./AddNewColumn.vue";
 import Error from "../error/Error.vue";
 import type { TableColumn } from "../../types/tableColumn";
 import { computed } from "vue";
+import { useGetTableRows } from "./hooks/useGetTableRows";
+import TableRows from "./TableRows.vue";
+import AddNewRow from "./AddNewRow.vue";
+import type { TableRowWithCells } from "../../types/tableRow";
 
 const { tableId, tableName } = defineProps<{
   tableId: string;
@@ -11,6 +15,7 @@ const { tableId, tableName } = defineProps<{
 }>();
 
 const { columns, error } = useGetTableColumns(tableId);
+const { rows, error: rowError } = useGetTableRows(tableId);
 
 const lastColumnIndex = computed(() => {
   const columnsArrayLength = columns.value.length;
@@ -22,6 +27,9 @@ const lastColumnIndex = computed(() => {
 
 function addNewColumn(newColumn: TableColumn) {
   columns.value.push(newColumn);
+}
+function addNewRow(newRow: TableRowWithCells) {
+  rows.value.push(newRow);
 }
 </script>
 
@@ -35,14 +43,18 @@ function addNewColumn(newColumn: TableColumn) {
         </th>
       </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+      <TableRows :rows="rows" />
+    </tbody>
   </table>
+  <AddNewRow :table-id="tableId" @new-row-added="addNewRow" />
+
   <AddNewColumn
     :table-id="tableId"
     @new-column-added="addNewColumn"
     :last-column-index="lastColumnIndex"
   />
-  <Error v-if="error" :error="error" />
+  <Error v-if="error || rowError" :error="error || rowError || ''" />
 </template>
 
 <style scoped></style>

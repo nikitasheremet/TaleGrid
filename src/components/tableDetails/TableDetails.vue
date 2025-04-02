@@ -35,6 +35,7 @@ function addNewColumn(newColumn: TableColumn) {
         </th>
       </tr>
     </thead>
+    <tbody></tbody>
   </table>
   <AddNewColumn
     :table-id="tableId"

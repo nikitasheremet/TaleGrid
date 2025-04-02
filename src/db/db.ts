@@ -30,6 +30,12 @@ export async function openDB() {
           keyPath: "id",
         });
         rowObjectStore.createIndex("tableId", "tableId", { unique: false });
+
+        const cellObjectStore = db.createObjectStore("cells", {
+          keyPath: "id",
+        });
+        cellObjectStore.createIndex("rowId", "rowId", { unique: false });
+        cellObjectStore.createIndex("columnId", "columnId", { unique: false });
       } catch (e) {
         console.error(e);
       }

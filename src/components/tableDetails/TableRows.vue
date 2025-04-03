@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { TableRowWithCells } from "../../types/tableRow";
+import EditableCell from "./EditableCell.vue";
 
 defineProps<{
   rows: TableRowWithCells[];
@@ -9,7 +10,7 @@ defineProps<{
 <template>
   <tr v-for="row of rows">
     <td v-for="cell of row.cells">
-      <input :value="cell?.value" />
+      <EditableCell :cell="cell" />
     </td>
   </tr>
 </template>

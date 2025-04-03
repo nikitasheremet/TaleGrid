@@ -9,8 +9,8 @@ export function useGetTableRows(tableId: string): {
   const rows = ref<TableRowWithCells[]>([]);
   const error = ref<Error | undefined>(undefined);
 
-  onMounted(() => {
-    getRowsForTable(tableId).then((result) => (rows.value = result));
+  onMounted(async () => {
+    rows.value = await getRowsForTable(tableId);
   });
   return {
     rows,

@@ -12,6 +12,7 @@ const { universeId, universeName } = defineProps<{
 const { tables, error } = useGetTablesForSelectedUniverse(universeId);
 
 function newTableAdded(table: Table) {
+  console.log(table);
   tables.value.push(table);
 }
 </script>

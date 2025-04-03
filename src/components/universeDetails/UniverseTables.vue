@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Table } from "../../types/table";
 
-const { tables, universe } = defineProps<{
+defineProps<{
   tables: Table[];
   universe: { name: string; id: string };
 }>();
@@ -10,12 +10,13 @@ const { tables, universe } = defineProps<{
 <template>
   <p>Tables</p>
   <ul>
-    <RouterLink
-      v-for="table in tables"
-      :to="`/universe/${universe.name}/${universe.id}/table/${table.name}/${table.id}`"
-    >
-      {{ table.name }}
-    </RouterLink>
+    <li v-for="table in tables">
+      <RouterLink
+        :to="`/universe/${universe.name}/${universe.id}/table/${table.name}/${table.id}`"
+      >
+        {{ table.name }}
+      </RouterLink>
+    </li>
   </ul>
 </template>
 

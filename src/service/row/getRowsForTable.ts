@@ -18,7 +18,7 @@ export async function getRowsForTable(
       const columnIndex = tableColumns.find(
         (column) => column.id === cell.columnId
       )?.index;
-      if (!columnIndex) {
+      if (columnIndex === undefined) {
         throw new Error(
           `Column with id ${cell.columnId} not found in table ${tableId}`
         );

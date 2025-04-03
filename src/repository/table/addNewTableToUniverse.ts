@@ -15,18 +15,10 @@ export async function addNewTableToUniverse(
     };
     const newTableAdded = tableStore.add(newTable);
     newTableAdded.onsuccess = () => {
-      resolve(dbTableToTable(newTableAdded.result));
+      resolve(newTable);
     };
     newTableAdded.onerror = () => {
       reject(newTableAdded.error);
     };
   });
-}
-
-function dbTableToTable(dbTable: any): Table {
-  return {
-    id: dbTable.id,
-    name: dbTable.name,
-    universeId: dbTable.universeId,
-  };
 }

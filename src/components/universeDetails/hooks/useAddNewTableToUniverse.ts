@@ -4,7 +4,7 @@ import { addNewTableToUniverse } from "../../../service/table/addNewTableToUnive
 
 export function useAddNewTableToUniverse(
   universeId: string,
-  newTableAddedCallback?: (newTableAdded: Table) => void
+  newTableAddedCallback: (newTableAdded: Table) => void
 ): {
   newTableName: Ref<string>;
   addNewTable: () => void;
@@ -14,17 +14,16 @@ export function useAddNewTableToUniverse(
   const error = ref<Error | undefined>(undefined);
   async function addNewTable() {
     try {
+      const newAddedTable = await addNewTableToUniverse(
+        universeId,
+        newTableName.value
+      );
+      newTableAddedCallback(newAddedTable);
+      newTableName.value = "";
     } catch (err) {
       if (err instanceof Error) {
         error.value = err;
       }
-    }
-    const newAddedTable = await addNewTableToUniverse(
-      universeId,
-      newTableName.value
-    );
-    if (newTableAddedCallback) {
-      newTableAddedCallback(newAddedTable);
     }
   }
   return {

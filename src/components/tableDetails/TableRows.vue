@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { TableRowWithCells } from "../../types/tableRow";
 
-const { rows } = defineProps<{
+defineProps<{
   rows: TableRowWithCells[];
 }>();
 </script>
@@ -9,7 +9,7 @@ const { rows } = defineProps<{
 <template>
   <tr v-for="row of rows">
     <td v-for="cell of row.cells">
-      <input :value="cell.value" />
+      <input :value="cell?.value" />
     </td>
   </tr>
 </template>

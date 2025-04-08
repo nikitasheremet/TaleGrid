@@ -1,5 +1,5 @@
 import { onMounted, ref, type Ref } from "vue";
-import type { TableRow, TableRowWithCells } from "../../../types/tableRow";
+import type { TableRowWithCells } from "../../../types/tableRow";
 import { getRowsForTable } from "../../../service/row/getRowsForTable";
 
 export function useGetTableRows(tableId: string): {

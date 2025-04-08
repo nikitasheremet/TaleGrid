@@ -4,11 +4,11 @@ export async function openDB() {
   console.log("Opening database...");
   await new Promise((resolve, reject) => {
     const request = indexedDB.open("talegrid", 3);
-    request.onerror = (event) => {
+    request.onerror = () => {
       console.error("Why didn't you allow my web app to use IndexedDB?!");
       reject(null);
     };
-    request.onupgradeneeded = (event) => {
+    request.onupgradeneeded = () => {
       db = request.result;
 
       try {
@@ -41,11 +41,11 @@ export async function openDB() {
         console.error(e);
       }
     };
-    request.onsuccess = (event) => {
+    request.onsuccess = () => {
       if (!db) {
         db = request.result;
       }
-      db.onerror = (event) => {
+      db.onerror = () => {
         // Generic error handler for all errors targeted at this database's
         // requests!
         console.error(`Database error:`);

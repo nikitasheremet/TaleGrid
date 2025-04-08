@@ -8,6 +8,7 @@ import { useGetTableRows } from "./hooks/useGetTableRows";
 import TableRows from "./TableRows.vue";
 import AddNewRow from "./AddNewRow.vue";
 import type { TableRowWithCells } from "../../types/tableRow";
+import { properCase } from "../helpers/properCase";
 
 const { tableId, tableName } = defineProps<{
   tableId: string;
@@ -34,27 +35,50 @@ function addNewRow(newRow: TableRowWithCells) {
 </script>
 
 <template>
-  <h2>{{ tableName }}</h2>
-  <table>
-    <thead>
-      <tr>
-        <th v-for="column in columns" :key="column.name">
-          {{ column.name }}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <TableRows :rows="rows" />
-    </tbody>
-  </table>
-  <AddNewRow :table-id="tableId" @new-row-added="addNewRow" />
+  <h2>{{ properCase(tableName) }}</h2>
+  <div class="table-details">
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th v-for="column in columns" :key="column.name">
+              {{ properCase(column.name) }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <TableRows :rows="rows" />
+        </tbody>
+      </table>
+      <div class="add-new-row">
+        <AddNewRow :table-id="tableId" @new-row-added="addNewRow" />
+      </div>
+    </div>
+    <div class="add-new-column">
+      <AddNewColumn
+        :table-id="tableId"
+        @new-column-added="addNewColumn"
+        :last-column-index="lastColumnIndex"
+      />
+    </div>
+  </div>
 
-  <AddNewColumn
-    :table-id="tableId"
-    @new-column-added="addNewColumn"
-    :last-column-index="lastColumnIndex"
-  />
   <Error v-if="error || rowError" :error="error || rowError || ''" />
 </template>
 
-<style scoped></style>
+<style scoped>
+.table-details {
+  display: flex;
+  flex-direction: row;
+}
+table {
+  border: 2px black;
+  border-collapse: collapse;
+}
+.add-new-row {
+  margin-top: 8px;
+}
+.add-new-column {
+  margin-left: 8px;
+}
+</style>

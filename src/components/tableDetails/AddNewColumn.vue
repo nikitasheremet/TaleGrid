@@ -29,7 +29,7 @@ const { newColumnDetails, addNewColumn } = useAddNewColumn(
 </script>
 
 <template>
-  <button @click="clickAddNewColumn">Add New Column</button>
+  <button @click="clickAddNewColumn">+ New Column</button>
   <div v-if="isAddNewColumnClicked">
     <h3>New Column form</h3>
     <form @submit.prevent @submit="addNewColumn">

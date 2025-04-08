@@ -27,8 +27,9 @@ export async function openDB() {
         columnObjectStore.createIndex("tableId", "tableId", { unique: false });
 
         const rowObjectStore = db.createObjectStore("rows", {
-          keyPath: "id",
+          autoIncrement: true,
         });
+        rowObjectStore.createIndex("id", "id", { unique: true });
         rowObjectStore.createIndex("tableId", "tableId", { unique: false });
 
         const cellObjectStore = db.createObjectStore("cells", {

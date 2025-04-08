@@ -23,8 +23,12 @@ async function handleAddRowClicked() {
 </script>
 
 <template>
-  <button @click="handleAddRowClicked">Add Row</button>
+  <button @click="handleAddRowClicked">+ Row</button>
   <Error v-if="error" :error="error" />
 </template>
 
-<style scoped></style>
+<style scoped>
+button {
+  width: 100%;
+}
+</style>

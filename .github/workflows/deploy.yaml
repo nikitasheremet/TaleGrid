@@ -14,8 +14,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env: # Job-level environment variables
-      NODE_ENV: production
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

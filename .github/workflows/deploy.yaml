@@ -5,8 +5,8 @@ on:
     branches:
       - main
 
-env:
-  NODE_ENV: production
+# env:
+#   NODE_ENV: production
 
 # Add permissions for the workflow
 permissions:

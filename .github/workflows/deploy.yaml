@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+# Add permissions for the workflow
+permissions:
+  contents: write # Allows writing to repository contents (e.g., pushing to gh-pages)
+  pages: write # Allows deploying to GitHub Pages
+  id-token: write # Required for some deployment actions
+
 jobs:
   build:
     runs-on: ubuntu-latest
